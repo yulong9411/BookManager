@@ -16,7 +16,6 @@ public class BReaderServiceImpl extends BaseServiceImpl implements BReaderServic
 	@Qualifier("bReaderDao")
 	private BReaderDao bReaderDao;
 	
-	@Override
 	public BReader retrieveBReaderByUserName(String userName, String password)
 	{
 		return this.bReaderDao.retrieveBReaderByUsername(userName, password);

@@ -21,7 +21,6 @@ public class BookCategoryServiceImpl extends BaseServiceImpl implements BookCate
 	private BookCategoryDao bookCategoryDao;
 	
 	@SuppressWarnings("rawtypes")
-	@Override
 	public boolean isBookCategoryExist(String type)
 	{
 		List list=bookCategoryDao.retrieveBookCategoryByName(type);

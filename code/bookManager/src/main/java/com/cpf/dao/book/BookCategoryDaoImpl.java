@@ -12,7 +12,6 @@ public class BookCategoryDaoImpl extends HibernateDaoUtil implements BookCategor
 {
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<BookCategory> retrieveBookCategoryByName(String name)
 	{
 		StringBuilder sb=new StringBuilder();
@@ -25,5 +24,6 @@ public class BookCategoryDaoImpl extends HibernateDaoUtil implements BookCategor
 		}
 		return this.getCurrentSession().createQuery(sb.toString()).list();
 	}
+
 
 }

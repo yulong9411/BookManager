@@ -10,7 +10,6 @@ import com.cpf.entity.system.Manager;
 public class ManagerDaoImpl extends HibernateDaoUtil implements ManagerDao
 {
 
-	@Override
 	public Manager retrieveManagerByUserName(String username, String password)
 	{
 		StringBuilder sb=new StringBuilder();

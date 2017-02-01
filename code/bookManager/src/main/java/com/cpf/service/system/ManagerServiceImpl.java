@@ -16,7 +16,6 @@ public class ManagerServiceImpl extends BaseServiceImpl implements ManagerServic
 	private ManagerDao managerDao;
 	
 	
-	@Override
 	public Manager retrieveManagerByUserName(String username, String password)
 	{
 		return this.managerDao.retrieveManagerByUserName(username, password);

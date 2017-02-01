@@ -10,7 +10,6 @@ import com.cpf.entity.system.BReader;
 public class BReaderDaoImpl extends HibernateDaoUtil implements BReaderDao
 {
 
-	@Override
 	public BReader retrieveBReaderByUsername(String username, String password)
 	{
 		StringBuilder sb=new StringBuilder();

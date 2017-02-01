@@ -9,7 +9,6 @@ import com.cpf.entity.book.Book;
 public class BookServiceImpl extends BaseServiceImpl implements BookService
 {
 
-	@Override
 	public void addBook(Book book)
 	{
 		this.addObject(book);

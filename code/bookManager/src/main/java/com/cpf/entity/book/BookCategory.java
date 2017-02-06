@@ -36,8 +36,8 @@ public class BookCategory
 	private Date editTime;
 
 	@ManyToMany
-	@JoinTable(name="book_category_relation",joinColumns=@JoinColumn(referencedColumnName="bookId"),
-	inverseJoinColumns=@JoinColumn(referencedColumnName="categoryId"))
+	@JoinTable(name="book_category_relation",joinColumns=@JoinColumn(name="categoryId"),
+			inverseJoinColumns=@JoinColumn(name="bookId"))
 	private List<Book> books;
 	
 	public BookCategory (){}

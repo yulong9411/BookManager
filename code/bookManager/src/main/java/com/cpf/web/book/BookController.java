@@ -23,18 +23,24 @@ import com.cpf.constant.BookValue;
 import com.cpf.constant.WebConstant;
 import com.cpf.entity.book.BookCategory;
 import com.cpf.service.book.BookCategoryService;
+import com.cpf.service.book.BookService;
 import com.cpf.util.CodeUtil;
 import com.cpf.util.NetUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-@Controller(value="/book")
+@Controller
+@RequestMapping(value="/book")
 public class BookController
 {
 	@Autowired
 	@Qualifier("bookCategoryService")
 	private BookCategoryService bookCategoryService;
+	
+	@Autowired
+	@Qualifier("bookService")
+	private BookService bookService;
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="addBookByCode",method=RequestMethod.POST)
@@ -50,20 +56,20 @@ public class BookController
 			List<BookCategory> list=new ArrayList<>();
 			JSONArray arr=(JSONArray) map.get(WebConstant.KEY_DOUBAN_TAGS);
 			Iterator<JSONObject> it=arr.iterator();
+			Date now=new Date();
 			while(it.hasNext()){
 				JSONObject json=it.next();
 				String name=json.getString(WebConstant.KEY_DOUBAN_NAME);
 				if (bookCategoryService.isBookCategoryExist(name))
 				{
-					list.add(bookCategoryService.addBookCategory(name));
+					list.add(new BookCategory(name, now, now));
 				}
 			}
 			
 			//构建图书对象
 			BookBuilder builder=new BookBuilder();
-			Date now=new Date();
 			builder.setValue(BookValue.ADDTIME, now);
-			builder.setValue(BookValue.AUTHOR, map.get(WebConstant.KEY_DOUBAN_AUTHOR));
+			builder.setValue(BookValue.AUTHOR, ((JSONArray)map.get(WebConstant.KEY_DOUBAN_AUTHOR)).get(0));
 			builder.setValue(BookValue.CODE, CodeUtil.createCode(isbnCode));
 			builder.setValue(BookValue.EDITTIME, now);
 			builder.setValue(BookValue.IMAGELARGE, map.get(WebConstant.KEY_DOUBAN_LARGE));
@@ -74,6 +80,8 @@ public class BookController
 			builder.setValue(BookValue.PUBLISHER, map.get(WebConstant.KEY_DOUBAN_PUBLISHER));
 			builder.setValue(BookValue.SUMMARY, map.get(WebConstant.KEY_DOUBAN_SUMMARY));
 			builder.setValue(BookValue.CATEGORYS, list);
+			this.bookService.addBook(builder.toBook());
+			return new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_ADD_SUCCESS);
 		} catch (Exception e)
 		{
 			e.printStackTrace();

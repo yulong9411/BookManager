@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -21,7 +23,7 @@ public class Book
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="hasDelete",columnDefinition="0")
+	@Column(name="hasDelete")
 	private String hasDelete;
 	
 	@Column(name="code")
@@ -36,7 +38,9 @@ public class Book
 	@Column(name="author")
 	private String author;
 	
-	@ManyToMany(mappedBy="books",cascade={CascadeType.PERSIST})
+	@ManyToMany(cascade={CascadeType.PERSIST})
+	@JoinTable(name="book_category_relation",joinColumns=@JoinColumn(name="bookId"),
+	inverseJoinColumns=@JoinColumn(name="categoryId"))
 	private List<BookCategory> categorys;
 	
 	@Column(name="publisher")

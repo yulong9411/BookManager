@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name="book")
 public class Book
@@ -50,10 +52,11 @@ public class Book
 	private Date editTime;
 	
 	@Column(name="summary")
+	@Type(type="text")
 	private String summary;
 	
 	@Column(name="pubDate")
-	private Date pubDate;
+	private String pubDate;
 	
 	@Column(name="imageLarge")
 	private String imageLarge;
@@ -168,13 +171,12 @@ public class Book
 		this.summary = summary;
 	}
 
-	public Date getPubDate()
-	{
+
+	public String getPubDate() {
 		return pubDate;
 	}
 
-	public void setPubDate(Date pubDate)
-	{
+	public void setPubDate(String pubDate) {
 		this.pubDate = pubDate;
 	}
 

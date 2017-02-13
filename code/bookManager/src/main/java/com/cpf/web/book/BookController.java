@@ -19,7 +19,7 @@ import com.cpf.common.constant.CommonConstant;
 import com.cpf.common.util.JsonUtil;
 import com.cpf.common.util.LogUtil;
 import com.cpf.common.util.StringUtil;
-import com.cpf.constant.BookValue;
+import com.cpf.constant.BookValueEnum;
 import com.cpf.constant.WebConstant;
 import com.cpf.entity.book.BookCategory;
 import com.cpf.service.book.BookCategoryService;
@@ -68,18 +68,18 @@ public class BookController
 			
 			//构建图书对象
 			BookBuilder builder=new BookBuilder();
-			builder.setValue(BookValue.ADDTIME, now);
-			builder.setValue(BookValue.AUTHOR, ((JSONArray)map.get(WebConstant.KEY_DOUBAN_AUTHOR)).get(0));
-			builder.setValue(BookValue.CODE, CodeUtil.createCode(isbnCode));
-			builder.setValue(BookValue.EDITTIME, now);
-			builder.setValue(BookValue.IMAGELARGE, map.get(WebConstant.KEY_DOUBAN_LARGE));
-			builder.setValue(BookValue.IMAGEMEDIUM, map.get(WebConstant.KEY_DOUBAN_MEDIUM));
-			builder.setValue(BookValue.IMAGESMALL, map.get(WebConstant.KEY_DOUBAN_SMALL));
-			builder.setValue(BookValue.ISBNCODE, isbnCode);
-			builder.setValue(BookValue.PUBDATE, map.get(WebConstant.KEY_DOUBAN_PUBDATE));
-			builder.setValue(BookValue.PUBLISHER, map.get(WebConstant.KEY_DOUBAN_PUBLISHER));
-			builder.setValue(BookValue.SUMMARY, map.get(WebConstant.KEY_DOUBAN_SUMMARY));
-			builder.setValue(BookValue.CATEGORYS, list);
+			builder.setValue(BookValueEnum.ADD_TIME, now);
+			builder.setValue(BookValueEnum.AUTHOR, ((JSONArray)map.get(WebConstant.KEY_DOUBAN_AUTHOR)).get(0));
+			builder.setValue(BookValueEnum.CODE, CodeUtil.createCode(isbnCode));
+			builder.setValue(BookValueEnum.EDIT_TIME, now);
+			builder.setValue(BookValueEnum.IMAGE_LARGE, map.get(WebConstant.KEY_DOUBAN_LARGE));
+			builder.setValue(BookValueEnum.IMAGE_MEDIUM, map.get(WebConstant.KEY_DOUBAN_MEDIUM));
+			builder.setValue(BookValueEnum.IMAGE_SMALL, map.get(WebConstant.KEY_DOUBAN_SMALL));
+			builder.setValue(BookValueEnum.ISBN_CODE, isbnCode);
+			builder.setValue(BookValueEnum.PUB_DATE, map.get(WebConstant.KEY_DOUBAN_PUBDATE));
+			builder.setValue(BookValueEnum.PUBLISHER, map.get(WebConstant.KEY_DOUBAN_PUBLISHER));
+			builder.setValue(BookValueEnum.SUMMARY, map.get(WebConstant.KEY_DOUBAN_SUMMARY));
+			builder.setValue(BookValueEnum.CATEGORYS, list);
 			this.bookService.addBook(builder.toBook());
 			return new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_ADD_SUCCESS);
 		} catch (Exception e)

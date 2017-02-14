@@ -21,4 +21,11 @@ public class BReaderServiceImpl extends BaseServiceImpl implements BReaderServic
 		return this.bReaderDao.retrieveBReaderByUsername(userName, password);
 	}
 
+	@Override
+	public BReader retrieveBReaderById(Long id) {
+		return (BReader) this.retrieveAnObject(BReader.class, id);
+	}
+
+	
+	
 }

@@ -34,6 +34,9 @@ public class BRecord
 	@Column(name="borrowTime")
 	private Date borrowTime;
 	
+	/**
+	 * 是否续借，0:不续借
+	 */
 	@Column(name="renew")
 	private String renew;
 	
@@ -45,6 +48,22 @@ public class BRecord
 	
 	@Column(name="hasDelete")
 	private String hasDelete;
+
+	public BRecord(Book book, BReader reader, Date borrowTime, String renew, Date backTime, String type,
+			String hasDelete) {
+		super();
+		this.book = book;
+		this.reader = reader;
+		this.borrowTime = borrowTime;
+		this.renew = renew;
+		this.backTime = backTime;
+		this.type = type;
+		this.hasDelete = hasDelete;
+	}
+
+	public BRecord() {
+		super();
+	}
 
 	public Long getId()
 	{

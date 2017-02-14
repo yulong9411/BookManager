@@ -28,7 +28,7 @@ public class Book
 	@Column(name="hasDelete")
 	private String hasDelete;
 	
-	@Column(name="code")
+	@Column(name="code",unique=true)
 	private String code;
 	
 	@Column(name="isbnCode")

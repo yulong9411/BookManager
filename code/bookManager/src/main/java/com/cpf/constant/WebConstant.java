@@ -7,9 +7,20 @@ package com.cpf.constant;
  */
 public class WebConstant
 {
+	public static final String BOOK_IS_NO_EXIST="图书不存在";
+	
+	//默认借书时长（单位天）
+	public static final int BORROW_TIME=60;
+	
+	//是否续借
+	public static final String IS_RENEW_NO="0";
+	public static final String IS_RENEW_YES="1";
+	
+	//是否删除
 	public static final String HAS_DELETE_YES="1";
 	public static final String HAS_DELETE_NO="0";
 	
+	//身份
 	public static final String READER_ROLE_TYPE="0";//读者
 	public static final String MANAGER_ROLE_TYPE="1";//管理员
 	

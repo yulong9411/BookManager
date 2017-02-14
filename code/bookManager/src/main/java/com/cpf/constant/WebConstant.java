@@ -8,6 +8,7 @@ package com.cpf.constant;
 public class WebConstant
 {
 	public static final String BOOK_IS_NO_EXIST="图书不存在";
+	public static final String BOOROW_COUNT_NOT_ENOUGH="已超过用户可借阅数";
 	
 	//默认借书时长（单位天）
 	public static final int BORROW_TIME=60;
@@ -23,6 +24,10 @@ public class WebConstant
 	//身份
 	public static final String READER_ROLE_TYPE="0";//读者
 	public static final String MANAGER_ROLE_TYPE="1";//管理员
+	
+	//记录类型type
+	public static final String BORROW_RECORDE="0";//借阅记录
+	public static final String ORDER_RECORDE="1";//预订记录
 	
 	/*---------------------豆瓣API---------------------*/
 	public static final String DOUBAN_API="https://api.douban.com/v2/book/isbn/";

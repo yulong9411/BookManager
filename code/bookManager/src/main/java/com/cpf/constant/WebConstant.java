@@ -10,6 +10,9 @@ public class WebConstant
 	public static final String BOOK_IS_NO_EXIST="图书不存在";
 	public static final String BOOROW_COUNT_NOT_ENOUGH="已超过用户可借阅数";
 	
+	public static final String SESSION_KEY_MANAGER="manager";
+	public static final String SESSION_KEY_READER="reader";
+	
 	//默认借书时长（单位天）
 	public static final int BORROW_TIME=60;
 	

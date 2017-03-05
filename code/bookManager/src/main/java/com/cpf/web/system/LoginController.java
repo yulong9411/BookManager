@@ -1,5 +1,7 @@
 package com.cpf.web.system;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -33,9 +35,9 @@ public class LoginController
 	 * @param type 0：读者登录，1：管理员登录
 	 * @return
 	 */
-	@RequestMapping(value="/goLogining")
+	@RequestMapping(value="goLogining")
 	@ResponseBody
-	public Object goLogining(String username,String password,String type){
+	public Object goLogining(HttpSession session,String username,String password,String type){
 		try
 		{
 			if(StringUtil.isBlank(username)||StringUtil.isBlank(password)||StringUtil.isBlank(type)){
@@ -45,8 +47,10 @@ public class LoginController
 			Object user=null;
 			if(WebConstant.MANAGER_ROLE_TYPE.equals(type)){
 				user=this.managerService.retrieveManagerByUserName(username, password);
+				session.setAttribute(WebConstant.SESSION_KEY_MANAGER, user);
 			}else if(WebConstant.READER_ROLE_TYPE.equals(type)) {
 				user=this.bReaderService.retrieveBReaderByUserName(username, password);
+				session.setAttribute(WebConstant.SESSION_KEY_READER, user);
 			}else {
 				return new ResponseBean(CommonConstant.RESPONSE_CODE_400, CommonConstant.MSG_PARAMETER_ERROR);
 			}

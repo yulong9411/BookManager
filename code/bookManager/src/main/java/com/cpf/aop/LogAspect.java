@@ -37,6 +37,7 @@ public class LogAspect
 		LogInfo logInfo=new LogInfo();
 		logInfo=fillLogInfo(joinPoint, returnValue, logInfo);
 		//TODO 需要一个全局Session存储当前登录用户,可能需要shiro管理用户
+		
 		logInfo.setOperateTime(new Date());
 		logInfo.setHasDelete(WebConstant.HAS_DELETE_NO);
 		logInfoService.addLogInfo(logInfo);

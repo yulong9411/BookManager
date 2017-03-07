@@ -19,5 +19,6 @@ public enum BookValueEnum
 	PUB_DATE,
 	IMAGE_LARGE,
 	IMAGE_MEDIUM,
-	IMAGE_SMALL
+	IMAGE_SMALL,
+	TITLE
 }

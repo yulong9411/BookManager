@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.cpf.constant.WebConstant;
 import com.cpf.entity.system.BReader;
 
 @Entity
@@ -34,6 +35,21 @@ public class SearchWord
 	
 	@Column(name="hasDelete")
 	private String hasDelete;
+
+	
+	
+	public SearchWord(String word, BReader reader)
+	{
+		this.word = word;
+		this.reader = reader;
+		this.searchTime=new Date();
+		this.hasDelete=WebConstant.HAS_DELETE_NO;
+	}
+
+	public SearchWord()
+	{
+		super();
+	}
 
 	public Long getId()
 	{

@@ -25,6 +25,9 @@ public class Book
 	@Column(name="id")
 	private Long id;
 	
+	@Column(name="title")
+	private String title;
+	
 	@Column(name="hasDelete")
 	private String hasDelete;
 	
@@ -208,5 +211,15 @@ public class Book
 	public void setImageSmall(String imageSmall)
 	{
 		this.imageSmall = imageSmall;
+	}
+
+	public String getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(String title)
+	{
+		this.title = title;
 	}
 }

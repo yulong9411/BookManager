@@ -1,5 +1,7 @@
 package com.cpf.web.info;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cpf.common.bean.ResponseBean;
 import com.cpf.common.constant.CommonConstant;
+import com.cpf.common.model.Pager;
 import com.cpf.common.util.LogUtil;
 import com.cpf.common.util.StringUtil;
 import com.cpf.constant.WebConstant;
@@ -57,7 +60,24 @@ public class BRecordController {
 			LogUtil.logException("BRecordController borrowBook", e);
 			return new ResponseBean(CommonConstant.RESPONSE_CODE_500, CommonConstant.MSG_ADD_FAIL);
 		}
-		
+	}
+	
+	@RequestMapping(value="getBorrowRecord",method=RequestMethod.GET)
+	@ResponseBody
+	public Object getBorrowRecord(HttpSession session,Integer pageNo,Integer pageSize,String type){
+		try
+		{
+			if(StringUtil.isBlank(type)){
+				return new ResponseBean(CommonConstant.RESPONSE_CODE_400, CommonConstant.MSG_PARAMETER_EMPTY);
+			}
+			BReader reader=(BReader) session.getAttribute(WebConstant.SESSION_KEY_READER);
+			Pager pager=bRecordService.retrieveBRecord(pageNo, pageSize, reader, type);
+			return new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_SUCCESS, pager);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return new ResponseBean(CommonConstant.RESPONSE_CODE_500, CommonConstant.MSG_ADD_FAIL);
+		}
 	}
 	
 }

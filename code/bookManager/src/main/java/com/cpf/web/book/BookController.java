@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -22,8 +24,11 @@ import com.cpf.common.util.StringUtil;
 import com.cpf.constant.BookValueEnum;
 import com.cpf.constant.WebConstant;
 import com.cpf.entity.book.BookCategory;
+import com.cpf.entity.info.SearchWord;
+import com.cpf.entity.system.BReader;
 import com.cpf.service.book.BookCategoryService;
 import com.cpf.service.book.BookService;
+import com.cpf.service.info.SearchWordService;
 import com.cpf.util.CodeUtil;
 import com.cpf.util.NetUtil;
 
@@ -41,6 +46,10 @@ public class BookController
 	@Autowired
 	@Qualifier("bookService")
 	private BookService bookService;
+	
+	@Autowired
+	@Qualifier("searchWordService")
+	private SearchWordService searchWordService;
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="addBookByCode",method=RequestMethod.POST)
@@ -68,6 +77,7 @@ public class BookController
 			
 			//构建图书对象
 			BookBuilder builder=new BookBuilder();
+			builder.setValue(BookValueEnum.TITLE, map.get(WebConstant.KEY_DOUBAN_TITLE));
 			builder.setValue(BookValueEnum.ADD_TIME, now);
 			builder.setValue(BookValueEnum.AUTHOR, ((JSONArray)map.get(WebConstant.KEY_DOUBAN_AUTHOR)).get(0));
 			builder.setValue(BookValueEnum.CODE, CodeUtil.createCode(isbnCode));
@@ -88,6 +98,23 @@ public class BookController
 			LogUtil.logException("BookController addBookByCode", e);
 			return new ResponseBean(CommonConstant.RESPONSE_CODE_500, CommonConstant.MSG_ADD_FAIL);
 		}
-		
+	}
+	
+	
+	@RequestMapping(value="searchBook",method=RequestMethod.GET)
+	@ResponseBody
+	public Object searchBook(HttpSession session,Integer pageNo,Integer pageSize
+			,String word,Integer categoryId){
+		try
+		{
+			
+			BReader reader=(BReader) session.getAttribute(WebConstant.SESSION_KEY_READER);
+			searchWordService.addSearchWord(new SearchWord(word, reader));
+			return new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_ADD_SUCCESS,);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return new ResponseBean(CommonConstant.RESPONSE_CODE_500, CommonConstant.MSG_ADD_FAIL);
+		}
 	}
 }

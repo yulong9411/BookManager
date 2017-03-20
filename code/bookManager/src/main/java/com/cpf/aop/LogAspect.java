@@ -8,10 +8,13 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import com.cpf.constant.WebConstant;
 import com.cpf.entity.info.LogInfo;
+import com.cpf.entity.system.Manager;
 import com.cpf.service.info.LogInfoService;
+import com.cpf.util.SessionUtil;
 
 /**
  * 处理日志切入点
@@ -36,8 +39,8 @@ public class LogAspect
 	public void afterReturning(JoinPoint joinPoint,Object returnValue){
 		LogInfo logInfo=new LogInfo();
 		logInfo=fillLogInfo(joinPoint, returnValue, logInfo);
-		//TODO 需要一个全局Session存储当前登录用户,可能需要shiro管理用户
-		
+		Manager manager=(Manager) SessionUtil.getSession().getAttribute(WebConstant.SESSION_KEY_MANAGER);
+		logInfo.setManagerId(manager.getId());
 		logInfo.setOperateTime(new Date());
 		logInfo.setHasDelete(WebConstant.HAS_DELETE_NO);
 		logInfoService.addLogInfo(logInfo);

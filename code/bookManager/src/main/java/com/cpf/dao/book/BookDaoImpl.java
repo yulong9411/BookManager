@@ -20,17 +20,26 @@ public class BookDaoImpl extends BaseDaoImpl implements BookDao {
 		return (Book) c.uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Book> retrieveBookBySearch(String word, Integer categoryId)
 	{
-		Criteria c=getCurrentSession().createCriteria(Book.class);
+		StringBuffer sb=new StringBuffer();
+		sb.append("select b.* from book b,book_category_relation br where 1=1");
 		if(StringUtil.isNotBlank(word)){
-			c.add(Restrictions.like("title", word));
+			sb.append(" and (b.title like '%")
+			.append(word)
+			.append("%'")
+			.append(" or b.author like '%")
+			.append(word)
+			.append("%'");
+			sb.append(")");
 		}
-		if(categoryId!=null){
-			c.add()
+		if (null!=categoryId)
+		{
+			sb.append(" and b.id=br.bookId and br.categoryId=").append(categoryId);
 		}
-		return null;
+		return getCurrentSession().createSQLQuery(sb.toString()).addEntity(Book.class).list();
 	}
 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cpf.bean.BookBuilder;
 import com.cpf.common.bean.ResponseBean;
 import com.cpf.common.constant.CommonConstant;
+import com.cpf.common.model.Pager;
 import com.cpf.common.util.JsonUtil;
 import com.cpf.common.util.LogUtil;
 import com.cpf.common.util.StringUtil;
@@ -107,10 +108,10 @@ public class BookController
 			,String word,Integer categoryId){
 		try
 		{
-			
 			BReader reader=(BReader) session.getAttribute(WebConstant.SESSION_KEY_READER);
 			searchWordService.addSearchWord(new SearchWord(word, reader));
-			return new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_ADD_SUCCESS,);
+			Pager pager=bookService.retrieveBookBySearch(pageNo, pageSize, word, categoryId);
+			return new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_ADD_SUCCESS,pager);
 		} catch (Exception e)
 		{
 			e.printStackTrace();

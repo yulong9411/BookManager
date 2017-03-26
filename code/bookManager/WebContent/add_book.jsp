@@ -13,7 +13,10 @@
 					$.ajax({
 						type:"POST",
 						url:"book/addBookByCode",
-						data:"isbnCode="+isbn,
+						data:{
+							"isbnCode":isbn
+						},
+						dataType:"json",
 						success:function(data){
 							alert(data.message+"  isbn="+isbn);
 							if(!data.status=='200'){

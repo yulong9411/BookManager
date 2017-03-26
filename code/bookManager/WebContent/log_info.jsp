@@ -14,7 +14,7 @@
 			$.ajax({
 				type:"GET",
 				url:"log_info/getAllLogInfo",
-				dataType:json,
+				dataType:"json",
 				success:function(data){
 					var backData=data.result;
 					var pageNo=backData.pageNo;

@@ -22,7 +22,10 @@
 					var list=backData.resultList;
 					setData(list);
 					for(var i=1;i<=pageSize;i++){
-						$("#label").html("<label id='"+i+"' onclick='loadLog("+i+")'>"+i+"</label>");
+						$("#label").append("<label id='"+i+"' onclick='loadLog("+i+")'>"+i+"</label>");
+						if(i==pageNo){
+							$("#"+i).css("color","red");
+						}
 					}
 				},
 				error:function(){
@@ -34,7 +37,7 @@
 		function setData(list){
 			for(var i=0;i<list.length;i++){
 				var obj=list[i];
-				$("#first").append("<tr><td>"+
+				$("#first").after("<tr><td>"+
 						(i+1)+"</td>"+
 						"<td>"+obj.user.managerId+"</td>"+
 						"<td>"+obj.content+"</td>"+

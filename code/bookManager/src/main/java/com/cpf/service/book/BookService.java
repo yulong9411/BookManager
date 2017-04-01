@@ -23,4 +23,10 @@ public interface BookService
 	 * @return
 	 */
 	Pager retrieveBookBySearch(Integer pageNo,Integer pageSize,String word,Integer categoryId);
+
+	void removeBook(Long id);
+	
+	void modifyBook(Book book);
+	
+	Book retrieveBookById(Long id);
 }

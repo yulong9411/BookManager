@@ -24,6 +24,7 @@ import com.cpf.common.util.LogUtil;
 import com.cpf.common.util.StringUtil;
 import com.cpf.constant.BookValueEnum;
 import com.cpf.constant.WebConstant;
+import com.cpf.entity.book.Book;
 import com.cpf.entity.book.BookCategory;
 import com.cpf.entity.info.SearchWord;
 import com.cpf.entity.system.BReader;
@@ -116,6 +117,34 @@ public class BookController
 		{
 			e.printStackTrace();
 			return new ResponseBean(CommonConstant.RESPONSE_CODE_500, CommonConstant.MSG_ADD_FAIL);
+		}
+	}
+	
+	@RequestMapping(value="removeBook",method=RequestMethod.POST)
+	@ResponseBody
+	public Object removeBook(Long id){
+		try
+		{
+			bookService.removeBook(id);
+			return new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_DELETE_SUCCESS);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return new ResponseBean(CommonConstant.RESPONSE_CODE_500, CommonConstant.MSG_DELETE_FAIL);
+		}
+	}
+	
+	@RequestMapping(value="updateBook",method=RequestMethod.POST)
+	@ResponseBody
+	public Object updateBook(Book book){
+		try
+		{
+			bookService.modifyBook(book);
+			return new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_DELETE_SUCCESS);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return new ResponseBean(CommonConstant.RESPONSE_CODE_500, CommonConstant.MSG_DELETE_FAIL);
 		}
 	}
 }

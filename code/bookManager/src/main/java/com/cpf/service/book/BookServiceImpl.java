@@ -21,7 +21,7 @@ public class BookServiceImpl extends BaseServiceImpl implements BookService
 	
 	public void addBook(Book book)
 	{
-		this.addObject(book);
+		addObject(book);
 	}
 
 
@@ -36,6 +36,27 @@ public class BookServiceImpl extends BaseServiceImpl implements BookService
 	{
 		List<Book> list=bookDao.retrieveBookBySearch(word, categoryId);
 		return getPager(pageNo, pageSize, list, null);
+	}
+
+
+	@Override
+	public void removeBook(Long id)
+	{
+		removeObject(Book.class, id);
+	}
+
+
+	@Override
+	public void modifyBook(Book book)
+	{
+		modifyObject(book);
+	}
+
+
+	@Override
+	public Book retrieveBookById(Long id)
+	{
+		return (Book) retrieveAnObject(Book.class, id);
 	}
 
 	

@@ -32,6 +32,10 @@ public class WebConstant
 	public static final String BORROW_RECORDE="0";//借阅记录
 	public static final String ORDER_RECORDE="1";//预订记录
 	
+	public static final String VIEW_LOGIN_CONTROL="login_control";
+	public static final String VIEW_USER_INDEX="user_index";
+	public static final String VIEW_MANAGER_INDEX="manager_index";
+	
 	/*---------------------豆瓣API---------------------*/
 	public static final String DOUBAN_API="https://api.douban.com/v2/book/isbn/";
 	public static final String KEY_DOUBAN_ORIGIN_TITLE="origin_title";

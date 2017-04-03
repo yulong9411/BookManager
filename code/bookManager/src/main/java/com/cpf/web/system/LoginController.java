@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cpf.common.bean.ResponseBean;
 import com.cpf.common.constant.CommonConstant;
@@ -36,34 +37,40 @@ public class LoginController
 	 * @return
 	 */
 	@RequestMapping(value="goLogining")
-	@ResponseBody
-	public Object goLogining(HttpSession session,String username,String password,String type){
+	public ModelAndView goLogining(HttpSession session,String username,String password,String type){
+		ResponseBean bean=null;
+		ModelAndView mv=new ModelAndView();
 		try
 		{
 			if(StringUtil.isBlank(username)||StringUtil.isBlank(password)||StringUtil.isBlank(type)){
-				return new ResponseBean(CommonConstant.RESPONSE_CODE_400, CommonConstant.MSG_PARAMETER_EMPTY);
+				bean=new ResponseBean(CommonConstant.RESPONSE_CODE_400, CommonConstant.MSG_PARAMETER_EMPTY);
 			}
 			String page=null;//TODO 跳转的页面
 			Object user=null;
 			if(WebConstant.MANAGER_ROLE_TYPE.equals(type)){
 				user=this.managerService.retrieveManagerByUserName(username, password);
+				page=WebConstant.VIEW_MANAGER_INDEX;
 				session.setAttribute(WebConstant.SESSION_KEY_MANAGER, user);
 			}else if(WebConstant.READER_ROLE_TYPE.equals(type)) {
 				user=this.bReaderService.retrieveBReaderByUserName(username, password);
+				page=WebConstant.VIEW_USER_INDEX;
 				session.setAttribute(WebConstant.SESSION_KEY_READER, user);
 			}else {
-				return new ResponseBean(CommonConstant.RESPONSE_CODE_400, CommonConstant.MSG_PARAMETER_ERROR);
+				bean=new ResponseBean(CommonConstant.RESPONSE_CODE_400, CommonConstant.MSG_PARAMETER_ERROR);
 			}
 			if(null==user){
-				return new ResponseBean(CommonConstant.RESPONSE_CODE_400, CommonConstant.MSG_LOGIN_FAIL);
+				bean= new ResponseBean(CommonConstant.RESPONSE_CODE_400, CommonConstant.MSG_LOGIN_FAIL);
 			}
-			return new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_SUCCESS);
+			bean= new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_SUCCESS,page);
 		} 
 		catch (Exception e)
 		{
 			e.printStackTrace();
 			LogUtil.logException("LoginController goLogining", e);
-			return new ResponseBean(CommonConstant.RESPONSE_CODE_500,CommonConstant.MSG_FAIL);
+			bean= new ResponseBean(CommonConstant.RESPONSE_CODE_500,CommonConstant.MSG_FAIL);
 		}
+		mv.setViewName(WebConstant.VIEW_LOGIN_CONTROL);
+		mv.addObject(CommonConstant.KEY_RESPONSEBEAN, bean);
+		return mv;
 	}
 }

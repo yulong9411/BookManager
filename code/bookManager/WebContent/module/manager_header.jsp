@@ -24,10 +24,8 @@
 					<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="../add_book.jsp">添加图书</a></li>
-					<li><a href="#">删除图书</a></li>
-					<li><a href="#">修改图书</a></li>
-					<li><a href="#">查看图书</a></li>
+					<li><a href="${ctx }/add_book.jsp">添加图书</a></li>
+					<li><a href="${ctx }/book/searchBook">查看图书</a></li>
 				</ul>
 			</li>
 			<li>

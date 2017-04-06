@@ -14,13 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cpf.bean.BookBuilder;
 import com.cpf.common.bean.ResponseBean;
 import com.cpf.common.constant.CommonConstant;
 import com.cpf.common.model.Pager;
 import com.cpf.common.util.JsonUtil;
-import com.cpf.common.util.LogUtil;
 import com.cpf.common.util.StringUtil;
 import com.cpf.constant.BookValueEnum;
 import com.cpf.constant.WebConstant;
@@ -105,20 +105,24 @@ public class BookController
 	
 	
 	@RequestMapping(value="searchBook",method=RequestMethod.GET)
-	@ResponseBody
-	public Object searchBook(HttpSession session,Integer pageNo,Integer pageSize
+	public ModelAndView searchBook(HttpSession session,Integer pageNo,Integer pageSize
 			,String word,Integer categoryId){
+		ModelAndView mv=new ModelAndView(WebConstant.VIEW_SEARCH_BOOK);
+		ResponseBean bean=null;
 		try
 		{
 			BReader reader=(BReader) session.getAttribute(WebConstant.SESSION_KEY_READER);
-			searchWordService.addSearchWord(new SearchWord(word, reader));
+			if(!StringUtil.isBlank(word))
+				searchWordService.addSearchWord(new SearchWord(word, reader));
 			Pager pager=bookService.retrieveBookBySearch(pageNo, pageSize, word, categoryId);
-			return new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_ADD_SUCCESS,pager);
+			bean= new ResponseBean(CommonConstant.RESPONSE_CODE_200, CommonConstant.MSG_ADD_SUCCESS,pager);
 		} catch (Exception e)
 		{
 			e.printStackTrace();
-			return new ResponseBean(CommonConstant.RESPONSE_CODE_500, CommonConstant.MSG_ADD_FAIL);
+			bean= new ResponseBean(CommonConstant.RESPONSE_CODE_500, CommonConstant.MSG_ADD_FAIL);
 		}
+		mv.addObject(CommonConstant.KEY_RESPONSEBEAN,bean);
+		return mv;
 	}
 	
 	@RequestMapping(value="removeBook",method=RequestMethod.POST)

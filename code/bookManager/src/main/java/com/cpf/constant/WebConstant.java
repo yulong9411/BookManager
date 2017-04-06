@@ -36,6 +36,7 @@ public class WebConstant
 	public static final String VIEW_LOGIN_CONTROL="login_control";
 	public static final String VIEW_USER_INDEX="user_index";
 	public static final String VIEW_MANAGER_INDEX="manager_index";
+	public static final String VIEW_SEARCH_BOOK="search_book";
 	
 	/*---------------------豆瓣API---------------------*/
 	public static final String DOUBAN_API="https://api.douban.com/v2/book/isbn/";

@@ -43,7 +43,7 @@ public class Book
 	@Column(name="author")
 	private String author;
 	
-	@ManyToMany(cascade={CascadeType.PERSIST})
+	@ManyToMany(cascade={CascadeType.ALL})
 	@JoinTable(name="book_category_relation",joinColumns=@JoinColumn(name="bookId"),
 	inverseJoinColumns=@JoinColumn(name="categoryId"))
 	private List<BookCategory> categorys;

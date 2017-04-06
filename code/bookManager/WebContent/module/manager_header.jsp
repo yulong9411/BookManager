@@ -25,7 +25,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li><a href="${ctx }/add_book.jsp">添加图书</a></li>
-					<li><a href="${ctx }/book/searchBook">查看图书</a></li>
+					<li><a href="${ctx }/book/searchBook?pageNo=1">查看图书</a></li>
 				</ul>
 			</li>
 			<li>

@@ -73,7 +73,7 @@ public class BookController
 			while(it.hasNext()){
 				JSONObject json=it.next();
 				String name=json.getString(WebConstant.KEY_DOUBAN_NAME);
-				if (bookCategoryService.isBookCategoryExist(name))
+				if (!bookCategoryService.isBookCategoryExist(name))
 				{
 					list.add(new BookCategory(name, now, now));
 				}

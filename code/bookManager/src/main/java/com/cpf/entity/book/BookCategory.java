@@ -3,6 +3,7 @@ package com.cpf.entity.book;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ public class BookCategory
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date editTime;
 
-	@ManyToMany
+	@ManyToMany(cascade={CascadeType.PERSIST})
 	@JoinTable(name="book_category_relation",joinColumns=@JoinColumn(name="categoryId"),
 			inverseJoinColumns=@JoinColumn(name="bookId"))
 	private List<Book> books;

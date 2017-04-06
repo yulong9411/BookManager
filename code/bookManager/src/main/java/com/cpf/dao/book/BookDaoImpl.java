@@ -25,7 +25,7 @@ public class BookDaoImpl extends BaseDaoImpl implements BookDao {
 	public List<Book> retrieveBookBySearch(String word, Integer categoryId)
 	{
 		StringBuffer sb=new StringBuffer();
-		sb.append("select b.* from book b,book_category_relation br where 1=1");
+		sb.append("select b.* from book b where 1=1");
 		if(StringUtil.isNotBlank(word)){
 			sb.append(" and (b.title like '%")
 			.append(word)

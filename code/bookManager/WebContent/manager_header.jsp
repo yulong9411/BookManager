@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/common/head_import.jsp"%>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".dropdown").click(function(){
+			$(".dropdown").each(function(){
+				$(this).removeClass("active");
+			});
+			$(this).addClass("active");
+		});
+	});
+</script>
+
 <body>
 	<nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">

@@ -62,6 +62,8 @@ public class BookController
 			if(StringUtil.isBlank(isbnCode))
 				return new ResponseBean(CommonConstant.RESPONSE_CODE_400, CommonConstant.MSG_PARAMETER_EMPTY);
 			String jsonResult=NetUtil.doGet(WebConstant.DOUBAN_API+isbnCode);
+			if(StringUtil.isBlank(jsonResult))
+				return new ResponseBean(CommonConstant.RESPONSE_CODE_400, WebConstant.ERROR_ISBN_CODE);
 			Map<String, Object> map=JsonUtil.convertJsonToMap(jsonResult);
 			//添加图书
 			List<BookCategory> list=new ArrayList<>();
@@ -97,7 +99,6 @@ public class BookController
 		} catch (Exception e)
 		{
 			e.printStackTrace();
-			LogUtil.logException("BookController addBookByCode", e);
 			return new ResponseBean(CommonConstant.RESPONSE_CODE_500, CommonConstant.MSG_ADD_FAIL);
 		}
 	}

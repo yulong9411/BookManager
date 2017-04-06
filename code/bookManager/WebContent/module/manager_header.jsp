@@ -11,9 +11,7 @@
 		});
 	});
 </script>
-
-<body>
-	<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="#">管理</a>
@@ -26,7 +24,7 @@
 					<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="#">添加图书</a></li>
+					<li><a href="../add_book.jsp">添加图书</a></li>
 					<li><a href="#">删除图书</a></li>
 					<li><a href="#">修改图书</a></li>
 					<li><a href="#">查看图书</a></li>

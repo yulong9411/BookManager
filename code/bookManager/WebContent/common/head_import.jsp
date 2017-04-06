@@ -7,8 +7,9 @@
 <!-- <script src="js/jquery-1.8.3.js"></script> -->
 <!-- <script src="js/bootstrap.js"></script> -->
 <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/npm.js"></script>
-<link rel="stylesheet" href="css/bootstrap.css">
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/npm.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
 <title>图书管理系统</title>
 </head>
+<body>

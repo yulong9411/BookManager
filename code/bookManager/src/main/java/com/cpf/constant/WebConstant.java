@@ -7,6 +7,7 @@ package com.cpf.constant;
  */
 public class WebConstant
 {
+	public static final String ERROR_ISBN_CODE="isbn错误";
 	public static final String BOOK_IS_NO_EXIST="图书不存在";
 	public static final String BOOROW_COUNT_NOT_ENOUGH="已超过用户可借阅数";
 	
